@@ -1,0 +1,9 @@
+C:\Users\Sasha\Desktop\Эл.Тех\Новый проект\3 в ряд\Three in row\Three in row\bin\Debug\Three in row.exe.config
+C:\Users\Sasha\Desktop\Эл.Тех\Новый проект\3 в ряд\Three in row\Three in row\bin\Debug\Three in row.exe
+C:\Users\Sasha\Desktop\Эл.Тех\Новый проект\3 в ряд\Three in row\Three in row\bin\Debug\Three in row.pdb
+C:\Users\Sasha\Desktop\Эл.Тех\Новый проект\3 в ряд\Three in row\Three in row\obj\Debug\Three in row.csprojAssemblyReference.cache
+C:\Users\Sasha\Desktop\Эл.Тех\Новый проект\3 в ряд\Three in row\Three in row\obj\Debug\Three_in_row.Properties.Resources.resources
+C:\Users\Sasha\Desktop\Эл.Тех\Новый проект\3 в ряд\Three in row\Three in row\obj\Debug\Three in row.csproj.GenerateResource.cache
+C:\Users\Sasha\Desktop\Эл.Тех\Новый проект\3 в ряд\Three in row\Three in row\obj\Debug\Three in row.exe
+C:\Users\Sasha\Desktop\Эл.Тех\Новый проект\3 в ряд\Three in row\Three in row\obj\Debug\Three in row.pdb
+C:\Users\Sasha\Desktop\Эл.Тех\Новый проект\3 в ряд\Three in row\Three in row\obj\Debug\Three_in_row.MainForm.resources
