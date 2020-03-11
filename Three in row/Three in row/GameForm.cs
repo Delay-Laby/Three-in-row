@@ -66,8 +66,8 @@ namespace Three_in_row
             Thread.Sleep(1000);
 
             ClearAll();
-            Refresh();
-            ClearAll();
+           // Refresh();
+          //  ClearAll();
 
 
         }
@@ -126,7 +126,7 @@ namespace Three_in_row
                 Refresh();
 
 
-                if (!(Cl(pressButton.Location.Y / SquareSize, pressButton.Location.X / SquareSize) || Cl(prevButton.Location.Y / SquareSize, prevButton.Location.X / SquareSize)))
+                if (!(ClB(pressButton.Location.Y / SquareSize, pressButton.Location.X / SquareSize) || ClB(prevButton.Location.Y / SquareSize, prevButton.Location.X / SquareSize)))
                 {
 
                     Refresh();
@@ -138,9 +138,13 @@ namespace Three_in_row
                 }
                 else
                 {
+                    Clear_1_position(pressButton.Location.Y / SquareSize, pressButton.Location.X / SquareSize);
+                    Clear_1_position(prevButton.Location.Y / SquareSize, prevButton.Location.X / SquareSize);
                     Refresh();
                     Thread.Sleep(500);
                     shift();
+                    Refresh();
+
 
                 }
 
@@ -155,7 +159,7 @@ namespace Three_in_row
 
             Refresh();
             ClearAll();
-            ClearAll();
+           // ClearAll();
 
 
 
@@ -290,33 +294,48 @@ namespace Three_in_row
 
         }
 
-        //Кнопка для закраски раномным цветом 
+        //Кнопка для очистки всего поля
         private void Clear(object sender, EventArgs e)
         {
             //ClearAll();
-            Color temp = RandC();
+            //Color temp = RandC();
+            //for (int i = 0; i < square; i++)
+            //{
+            //    for (int j = 0; j < square; j++)
+            //    {
+            //        buttons[i, j].BackColor = temp;
+            //    }
+            //}
             for (int i = 0; i < square; i++)
             {
                 for (int j = 0; j < square; j++)
                 {
-                    buttons[i, j].BackColor = temp;
-                }
-            }
 
+                    Controls.Remove(buttons[i, j]);
+                       
+                  
+
+                }
+
+            }
+            Score = 0;
+            button1.Enabled = false;
+            button2.Enabled = false;
+            button3.Enabled = true;
 
         }
         //Проверка н всю карту
         public void ClearAll()
         {
             //Thread.Sleep(700);
-            clear();
-            Refresh();
+            
 
             // Thread.Sleep(700);
             shift();
             Refresh();
             // Thread.Sleep(700);
-
+            clear();
+            Refresh();
 
             for (int i = 0; i < square; i++)
             {
@@ -326,8 +345,10 @@ namespace Three_in_row
                     {
                         buttons[i, j].BackColor = RandC();
                         Refresh();
-                        if (Cl(i, j))
+                        if (ClB(i, j))
                         {
+                            Clear_1_position(i, j);
+
                             ClearAll();
                         }
                     }
@@ -342,7 +363,62 @@ namespace Three_in_row
 
         }
 
-        // подсчет и стирание 
+        // проверка на наличие 3 в ряд
+        public bool ClB(int j, int i)
+        {
+
+            int tempi = i;
+            int tempj = j;
+            //нулевый
+            while ((tempj + 1 < square) && (buttons[j, i].BackColor == buttons[tempj + 1, i].BackColor) && ((i < square && j < square) || (j > 0 && i > 0)))
+            {
+                RowD++;
+                tempj++;
+            }
+
+            tempj = j;
+            while ((tempj - 1 >= 0) && (buttons[j, i].BackColor == buttons[tempj - 1, i].BackColor) && ((i < square && j < square) || (j > 0 && i > 0)))
+            {
+                RowU++;
+
+                tempj--;
+            }
+
+            //право 
+            while ((tempi + 1 < square) && (buttons[j, i].BackColor == buttons[j, tempi + 1].BackColor) && ((i < square && j < square) || (j > 0 && i > 0)))
+            {
+                horR++;
+
+                tempi++;
+            }
+
+            tempi = i;
+            //лево
+            while ((tempi - 1 >= 0) && (buttons[j, i].BackColor == buttons[j, tempi - 1].BackColor) && ((i < square && j < square) || (j > 0 && i > 0)))
+            {
+                horL++;
+                tempi--;
+            }
+
+            if (horR + horL >= ForClear)
+            {
+                
+                return true;
+            }
+            if (RowD + RowU >= ForClear)
+            {
+            
+                return true;
+            }
+            RowU = 0;
+            RowD = 0;
+            horL = 0;
+            horR = 0;
+            return false;
+        }
+
+        // подсчет и стирание сразу 
+        //использовалось на 129 строчке
         public bool Cl(int j, int i)
         {
 
@@ -438,7 +514,7 @@ namespace Three_in_row
 
 
         }
-
+        //1- clear,2- restart, 3 - start
         private void Start_Click(object sender, EventArgs e)
         {
             CreateMap();
@@ -448,6 +524,10 @@ namespace Three_in_row
 
         }
 
-
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            NumOfCol = trackBar1.Value;
+            label5.Text = Convert.ToString(NumOfCol);
+        }
     }
 }
